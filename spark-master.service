@@ -1,0 +1,16 @@
+[Unit]
+Description=Spark Master Service
+Wants=network.target network-online.target
+After=network.target network-online.target
+
+[Service]
+Type=forking
+User=spark
+WorkingDirectory=/var/lib/spark
+#ExecStart=/opt/spark/spark-2.0.0-bin-hadoop2.7/sbin/start-master.sh --port 7077 --webui-port 8080 --work-dir /var/lib/spark --properties-file /opt/spark/spark-2.0.0-bin-hadoop2.7/spark-defaults.conf
+ExecStart=/opt/spark/spark-2.0.0-bin-hadoop2.7/sbin/start-master.sh
+ExecStop=/opt/spark/spark-2.0.0-bin-hadoop2.7/sbin/stop-master.sh
+Restart=on-abort
+
+[Install]
+WantedBy=multi-user.target
